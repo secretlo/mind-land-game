@@ -1059,3 +1059,10 @@ OverflowError: value too large to convert to int
     storage.connection_process.terminate()
 AttributeError: 'NoneType' object has no attribute 'terminate'
 
+
+[2021-04-23 06:44:11] Traceback (most recent call last):
+  File "lifespan_handler.pyx", line 129, in cefpython_py37.LifespanHandler_OnBeforeClose
+  File "/media/feodoritiy/HDD/SWAP/ФТИ/1курс/Программирование/Подъюбкин_Курсач_Флиртович/Коля_Передриенко/client/browser.py", line 97, in OnBeforeClose
+    storage.connection_process.terminate()
+AttributeError: 'NoneType' object has no attribute 'terminate'
+
