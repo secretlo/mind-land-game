@@ -27,7 +27,7 @@ class Browser():
         cef.Initialize(settings=settings)
 
         start_page = self._html_to_data_uri(self.read(f'./cache/{start_page_name}.html'))
-        self.browser = cef.CreateBrowserSync(window_title="Versus X", url=start_page)
+        self.browser = cef.CreateBrowserSync(window_title="Поле разума", url=start_page)
         self.browser.SetClientHandler(LifespanHandler())
         
         self._bind_to_js(js_bindings)
