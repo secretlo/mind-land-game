@@ -1,0 +1,129 @@
+* {
+   box-sizing: border-box;
+}
+
+body {
+   height: calc(100vh);
+   font-size: 16px;
+   margin: 0;
+   padding: 0;
+   background: var(--c9);
+   position: relative;
+   overflow: hidden;
+}
+
+:root {
+   --c0: #FFFFFF;
+   --c2: #FE81FE;
+   --c3: #CA89C3;
+   --c4: #B153A8;
+   --c9: #423F42;
+}
+
+.f-pixel {
+   font-family: 'Press Start 2P', cursive;
+}
+.f-simple {
+   font-family: 'M PLUS Rounded 1c', sans-serif;
+}
+
+.w100 {
+   width: 100%;
+}
+.row {
+   display: flex;
+   flex-direction: row;
+}
+.col {
+   display: flex;
+   flex-direction: column;
+}
+.jcc {
+   justify-content: center;
+}
+.aic {
+   align-items: center;
+}
+.jcsb {
+   justify-content: space-between;
+}
+
+.title-shadow {
+   text-shadow: 0px 4px 8px rgba(139, 9, 103, 0.5);
+}
+
+.page-title {
+   font-size: calc(60/16*1em);
+   color: var(--c3);
+   margin-top: calc(67/16*1rem);
+   text-align: center;
+}
+
+.brain {
+   background-position: center;
+   background-size: cover;
+   background-repeat: no-repeat;
+   height: calc(600/16*1em);
+   width: calc(800/16*1em);
+   position: absolute;
+   top: calc(240/16*1em);
+   left: 50%;
+   transform: translateX(-50%);
+   z-index: -1;
+}
+
+button:not(.button_custom) {
+   background: transparent;
+   border: none;
+   font-family: 'M PLUS Rounded 1c', sans-serif;
+   color: var(--c0);
+   padding: 0.5em 1em;
+   border-bottom: 2px solid var(--c0);
+   font-size: calc(26/16*1em);
+   letter-spacing: 0.455em;
+   cursor: pointer;
+   width: fit-content;
+   margin-bottom: 0.5em;
+}
+
+input:not(.input_custom) {
+   background: transparent;
+   font-family: 'M PLUS Rounded 1c', sans-serif;
+   color: var(--c0);
+   padding: 0.5em 1em;
+   border: 2px solid var(--c3);
+   font-size: calc(26/16*1em);
+   letter-spacing: 0.455em;
+   cursor: pointer;
+   width: 60%;
+}
+input:not(.input_custom)::placeholder {
+   color: var(--c0);
+}
+#mainBlock {
+   width: calc(528/16*1em);
+   margin: auto;
+}
+#mainBlock > .col > button {
+   width: 100%;
+}
+.categories {
+   margin-bottom: 1em;
+}
+
+#gid {
+   color: var(--c2);
+   font-weight: bold;
+}
+#content {
+   width: 528px;
+
+   font-size: 25px;
+   line-height: 203.5%;
+   /* or 51px */
+
+   text-align: justify;
+   letter-spacing: 0.455em;
+
+   color: #FFFFFF;
+}
