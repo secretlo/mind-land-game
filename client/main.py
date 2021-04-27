@@ -1,7 +1,3 @@
-from client.logic.multiplayer import connect_multiplayer, create_multiplayer
-from client.logic.game import send_result
-from client.logic.set_category import set_category
-from client.logic.login import set_login_type
 import sys
 import threading
 from typing import Set
