@@ -15,10 +15,15 @@
          "name": "Python: Static",
          "type": "python",
          "request": "launch",
-         "program": "/media/feodoritiy/HDD/SWAP/ФТИ/1курс/Программирование/Подъюбкин_Курсач_Флиртович/Коля_Передриенко/client/main.py",
+         "windows": {
+            "program": "${workspaceFolder}/client/main.py",
+         },
+         "linux": {
+            "program": "${workspaceFolder}/client/main.py",
+         },
          "args": [],
          "console": "integratedTerminal",
-      }
+      },
       {
          "name": "C++ Debug Current",
          "type": "cppdbg",

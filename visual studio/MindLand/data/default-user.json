@@ -1,0 +1,7 @@
+{
+   "id": 0,
+   "login": "string",
+   "password": "string_md5",
+   "avg_duration": 0,
+   "avg_n": 0
+}

@@ -17,7 +17,8 @@
          "forcedInclude": [
             //"${workspaceFolder}/include/config.h"
          ],
-         "compilerPath": "/usr/bin/g++-10",
+         //"compilerPath": "/usr/bin/g++-10",
+         "compilerPath": "C:\\MinGW\\bin\\gcc.exe",
          "cStandard": "c17",
          "cppStandard": "c++20",
          //"compileCommands": "/path/to/compile_commands.json",

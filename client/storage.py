@@ -23,6 +23,11 @@ this.host = None
 this.tasks = multiprocessing.Queue(20)
 def add_task(js_func_name, *args):
    this.tasks.put([js_func_name, args])
+def get_all_tasks():
+   tasks = []
+   while not this.tasks.qsize() == 0:
+      tasks.append(this.tasks.get())
+   return tasks
 
 FLASK_HOST = '127.0.0.1'
 

@@ -54,26 +54,45 @@
       {
          "label": "G++ Compile Current",
          "type": "shell",
-         "command": "/usr/bin/time",
-         "args": [
-            "-p",
-            "sh",
-            "-c",
-            "\"",
-            "g++",
-            "-std=c++17",
-            "-pthread",
-            "-lstdc++fs",
-            //"-H",
-            "-Wall",
-            "-o",
-            "${workspaceFolder}/server/bin/_${fileBasenameNoExtension}.o",
-            "-I",
-            "${workspaceFolder}/server/include",
-            "-c",
-            "${fileDirname}/${fileBasenameNoExtension}.cpp",
-            "\"",
-         ],
+         "linux": {
+            "command": "/usr/bin/time",
+            "args": [
+               "-p",
+               "sh",
+               "-c",
+               "\"",
+               "g++",
+               "-std=c++17",
+               "-pthread",
+               "-lstdc++fs",
+               //"-H",
+               "-Wall",
+               "-o",
+               "${workspaceFolder}/server/bin/_${fileBasenameNoExtension}.o",
+               "-I",
+               "${workspaceFolder}/server/include",
+               "-c",
+               "${fileDirname}/${fileBasenameNoExtension}.cpp",
+               "\"",
+            ],
+            "options": {
+               "cwd": "/usr/bin"
+            },
+         },
+         "windows": {
+            "command": "gcc",
+            "args": [
+               "-std=c++17",
+               //"-H",
+               "-Wall",
+               "-o",
+               "${workspaceFolder}\\server\\bin\\_${fileBasenameNoExtension}.o",
+               "-I",
+               "${workspaceFolder}\\server\\include",
+               "-c",
+               "${fileDirname}\\${fileBasenameNoExtension}.cpp",
+            ]
+         },
          "problemMatcher": [
             "$gcc"
          ],
@@ -84,9 +103,6 @@
          "presentation": {
             "focus": true,
             "clear": true
-         },
-         "options": {
-            "cwd": "/usr/bin"
          },
       },
       {
