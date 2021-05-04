@@ -24,7 +24,7 @@ namespace RouteGame {
       data["sender_id"] = senderId;
       std::cout << "Game, sendAll: action '" << action << "' with data " << data.dump() << '\n';
 
-      File* games = new File("..\\data\\games.json");
+      File* games = new File("D:\\mind-land-game-git\\visual studio\\MindLand\\data\\games.json");
       games->updateChilds("gid", gid, [&](json& game){
          for (json user : game["users"]) {
             std::string userHost = user["host"].get<std::string>();
@@ -36,7 +36,7 @@ namespace RouteGame {
    }
 
    void Handler(const Request& req, Response& res) {
-      File* words = new File("..\\data\\words.json");
+      File* words = new File("D:\\mind-land-game-git\\visual studio\\MindLand\\data\\words.json");
       std::string action = getParam(req, "action");
 
       std::cout << "Game: Request\n";
@@ -77,7 +77,7 @@ namespace RouteGame {
          size_t id = std::stoi(getParam(req, "id"));
          size_t duration = std::stoi(getParam(req, "duration"));
          
-         File* users = new File("..\\data\\users.json");
+         File* users = new File("D:\\mind-land-game-git\\visual studio\\MindLand\\data\\users.json");
          double new_avg;
          size_t new_n;
          users->updateChilds("id", id, [&](json& user){
@@ -99,8 +99,8 @@ namespace RouteGame {
       }
       
       else if (action == "create-game") {
-         File* games = new File("..\\data\\games.json");
-         json gameTpl = File::ReadJson("..\\data\\default-game.json");
+         File* games = new File("D:\\mind-land-game-git\\visual studio\\MindLand\\data\\games.json");
+         json gameTpl = File::ReadJson("D:\\mind-land-game-git\\visual studio\\MindLand\\data\\default-game.json");
          size_t gid;
          
          std::cout << "Game, create-game: Query\n";
@@ -116,8 +116,8 @@ namespace RouteGame {
       }
 
       else if (action == "connect") {
-         File* games = new File("..\\data\\games.json");
-         json userTpl = File::ReadJson("..\\data\\default-game-user.json");
+         File* games = new File("D:\\mind-land-game-git\\visual studio\\MindLand\\data\\games.json");
+         json userTpl = File::ReadJson("D:\\mind-land-game-git\\visual studio\\MindLand\\data\\default-game-user.json");
 
          size_t gid = std::stoi(getParam(req, "gid"));
          size_t id = std::stoi(getParam(req, "id"));

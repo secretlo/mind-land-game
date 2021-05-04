@@ -1,6 +1,5 @@
 import sys
 import threading
-from typing import Set
 
 from singlifier import *
 from browser import *

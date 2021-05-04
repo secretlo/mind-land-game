@@ -1,7 +1,7 @@
 [
    {
-      "avg_duration": 21355.666666666664,
-      "avg_n": 6,
+      "avg_duration": 21823.85714285714,
+      "avg_n": 7,
       "id": 1,
       "login": "man",
       "password": "boy"
@@ -42,8 +42,8 @@
       "password": "hello"
    },
    {
-      "avg_duration": 32378.333333333336,
-      "avg_n": 3,
+      "avg_duration": 30441.75,
+      "avg_n": 4,
       "id": 1,
       "login": "asd",
       "password": "asd"
