@@ -4,7 +4,7 @@ namespace RouteLeaders {
    void Handler(const Request& req, Response& res) {
       std::cout << "Leaders: Query\n";
 
-      File* users = new File("..\\data\\users.json");
+      File* users = new File("D:\\mind-land-game-git\\visual studio\\MindLand\\data\\users.json");
       std::vector<std::pair<double, std::string>> rating;
 
       users->forEach([&](json& user){

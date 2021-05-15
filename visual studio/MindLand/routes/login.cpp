@@ -7,7 +7,7 @@ namespace RouteLogin {
          password = getParam(req, "password");
       size_t id;
 
-      File* users = new File("..\\data\\users.json");
+      File* users = new File("D:\\mind-land-game-git\\visual studio\\MindLand\\data\\users.json");
 
       std::cout << "Login: Request (type: " << type << ", login: " << login << ", password: " << password << ")\n";
 
@@ -33,7 +33,7 @@ namespace RouteLogin {
             return;
          }
 
-         json userTpl = File::ReadJson("..\\data\\default-user.json");
+         json userTpl = File::ReadJson("D:\\mind-land-game-git\\visual studio\\MindLand\\data\\default-user.json");
          size_t maxId = 0;
          users->forEach(
             [&](json& user){
