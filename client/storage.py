@@ -20,12 +20,20 @@ this.flask = Flask(__name__)
 this.port = None
 this.host = None
 
+def init_swap():
+   global this
+   print('INIT SWAP:', this.init_swap)
+   this.swap_manager = multiprocessing.Manager()
+   this.swap = this.swap_manager.dict()
+   this.swap['session_id'] = None
+
 this.tasks = multiprocessing.Queue(20)
 def add_task(js_func_name, *args):
    this.tasks.put([js_func_name, args])
 def get_all_tasks():
+   #print('Get: tasks are', this.tasks)
    tasks = []
-   while not this.tasks.qsize() == 0:
+   while (not this.tasks.empty()) or (not this.tasks.qsize() == 0):
       tasks.append(this.tasks.get())
    return tasks
 
@@ -47,7 +55,7 @@ def load(path, data):
 def gameload(action, data):
    final_data = {
       'action': action,
-      'id': this.id,
+      'id': str(this.id),
    }
 
    for [key, val] in data.items():
@@ -85,11 +93,18 @@ def add_response_handler(action, callback):
 def run_server():
    this.host = FLASK_HOST
    this.port = _get_free_port()
-   process = multiprocessing.Process(target=_connect_stuff, args=(this.host, this.port))
+   this.init_swap()
+   process = multiprocessing.Process(target=_connect_stuff, args=(this.host, this.port, this.tasks, this.swap))
    this.connection_process = process
    process.start()
+   this.server_url = f'{this.host}:{this.port}'
+
+def stop_server():
+   this.connection_process.terminate()
    
-def _connect_stuff(host, port):
+def _connect_stuff(host, port, tasks, swap):
+   this.tasks = tasks
+   this.swap = swap
    this.flask.run(host, port)
    
 def _get_free_port():

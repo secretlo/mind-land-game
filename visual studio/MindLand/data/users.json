@@ -44,8 +44,15 @@
    {
       "avg_duration": 32378.333333333336,
       "avg_n": 3,
-      "id": 1,
+      "id": 7,
       "login": "asd",
       "password": "asd"
+   },
+   {
+      "avg_duration": 0,
+      "avg_n": 0,
+      "id": 8,
+      "login": "hello",
+      "password": "world"
    }
 ]

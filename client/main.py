@@ -43,6 +43,8 @@ def main():
             'getMode': get_mode,
             
             'sendResult': send_result,
+            'sendLetter': send_letter,
+            'sendWin': send_win,
             
             # multiplayer.py
             'startServer': start_server,

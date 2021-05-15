@@ -33,22 +33,30 @@ $(window).on('keyup', e => {
       return;
    }
 
-   setAttempts(attemptsCounter - 1);
-   openLetter(letter, true);
-   
-   if ($('.letter_closed').length == 0)
-      win();
+   sendLetter(letter);
 });
 
 function openLetter(letter, withCombo) {
-   $(`.letter[data-letter="${letter}"]`).removeClass('letter_closed').each((i, el) => {
-      if (withCombo) addCombo();
-      el.textContent = el.dataset.letter.toUpperCase();
-   });
+   if (withCombo) {
+      $(`.letter[data-letter="${letter}"]`).removeClass('letter_closed').each((i, el) => {
+         addCombo();
+         el.textContent = el.dataset.letter.toUpperCase();
+      });
+      // if all letters are filled
+      if ($('.letter_closed').length == 0) {
+         sendWin();
+      }
+   }
+   else {
+      $(`.letter[data-letter="${letter}"]`).removeClass('letter_closed').each((i, el) => {
+         el.textContent = el.dataset.letter.toUpperCase();
+      });
+   }
 }
 
 let comboCounter = 0;
 function addCombo() {
+   setAttempts(attemptsCounter - 1);
    comboCounter++;
    if (comboCounter == 3) {
       comboCounter = 0;
@@ -63,17 +71,23 @@ let gameEnd;
 $(guessWord).on('click', e => {
    const guess = prompt('Как думаете, что за слово загадано?').toLowerCase();
    if (guess == window.word)
-      win();
+      sendWin();
 });
 
 function win() {
    gameEnd = Date.now();
    alert('Вы угадали слово!! Поздравляем :)');
-   sendResult(gameEnd - gameStart);
    window.word.split('').forEach(letter => openLetter(letter, false));
 }
 
-function saveResult(gameStart, gameEnd) {
-   const duration = gameEnd - gameStart;
-   sendResult(duration);
-}
+
+
+setInterval(() => {
+   getTasks(tasks => {
+      if (tasks.length > 0)
+         console.log('Running tasks:', tasks);
+      for (const [task, args] of tasks) {
+         window[task](...args);
+      }
+   })
+}, 100);

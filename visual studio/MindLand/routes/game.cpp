@@ -39,11 +39,13 @@ namespace RouteGame {
       File* words = new File("..\\data\\words.json");
       std::string action = getParam(req, "action");
 
-      std::cout << "Game: Request\n";
+      std::cout << "Game: Request with action '" << action << "'\n";
 
       if (action == "select-word") {
          auto category = getParam(req, "category");
-         std::cout << "Category is '" << category << "', words " << words->abspath << "\n";
+         auto mode = getParam(req, "mode");
+         std::cout << "Category is '" << category << "', words " << words->abspath << " with mode " << mode << "\n";
+
          words->updateJson([&](json* words){
             if (!words->contains(category)) {
                std::cout << "Game, select-word: Error, No target category \"" << category << "\" in DB\n";
@@ -69,6 +71,15 @@ namespace RouteGame {
                   {"word", targetWord},
                   {"description", targetDescription},
                });
+               if (mode == "multi-player") {
+                  auto gid = std::stoi(getParam(req, "gid")),
+                     id = std::stoi(getParam(req, "id"));
+                  sendAll(gid, id, action, json{
+                     {"word", targetWord},
+                     {"description", targetDescription},
+                     {"category", category},
+                  });
+               }
             }
          });
       }
@@ -115,29 +126,51 @@ namespace RouteGame {
          response(res, "OK", action, json{{"gid", gid}});
       }
 
-      else if (action == "connect") {
-         File* games = new File("..\\data\\games.json");
-         json userTpl = File::ReadJson("..\\data\\default-game-user.json");
+      else {
 
          size_t gid = std::stoi(getParam(req, "gid"));
          size_t id = std::stoi(getParam(req, "id"));
-         std::string host = getParam(req, "host");
 
-         size_t playersCount;
+         if (action == "connect") {
+            File* games = new File("..\\data\\games.json");
+            json userTpl = File::ReadJson("..\\data\\default-game-user.json");
 
-         games->updateChilds("gid", gid, [&](json& game){
-            userTpl["host"] = host;
-            userTpl["id"] = id;
-            game["users"].push_back(userTpl);
+            std::string host = getParam(req, "host");
 
-            playersCount = game["users"].size();
-         });
+            std::cout << "Game, connect: id is " << id << ", gid is " << gid << ", host is " << host << "\n";
 
-         response(res, "OK", action);
-         sendAll(gid, id, "connect", json{
-            {"count", playersCount},
-         });
+            size_t playersCount;
+
+            games->updateChilds("gid", gid, [&](json& game){
+               userTpl["host"] = host;
+               userTpl["id"] = id;
+               game["users"].push_back(userTpl);
+
+               playersCount = game["users"].size();
+            });
+
+            response(res, "OK", action);
+            sendAll(gid, id, "connect", json{
+               {"count", playersCount},
+            });
+         }
+
+         else if (action == "letter") {
+            std::string letter = getParam(req, "letter");
+
+            response(res, "OK", action);
+            sendAll(gid, id, action, json{
+               {"letter", letter},
+            });
+         }
+
+         else if (action == "win") {
+            response(res, "OK", action);
+            sendAll(gid, id, action, json{});
+         }
+
       }
+
    }
 } // RouteGame
 
